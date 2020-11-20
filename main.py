@@ -1,31 +1,15 @@
-import os
+from files import get_file_list, get_total_files
 
 
-def get_total_files(directory, level=0):
-    """
-    Returns total files in a folder.
-    ---------
-    Default to same folder without sub-directories.
-
-    Arguments:
-        directory:
-        level: (default 0) change if you want to span all subdirectories
-    """
-    total_files = 0
-    walk_path = os.walk(directory)
-    for _, folder, files in walk_path:
-        total_files += len(files)
-        # print(files)
-        if level == 0:
-            break
-
-    # print(total_files)
-    return total_files
+def test():
+    import os
 
 
 def main():
     total_files = get_total_files(path)
+    file_list = get_file_list(path)
     print('total_files ->', total_files)
+    test()
 
 
 if __name__ == "__main__":
