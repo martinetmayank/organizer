@@ -15,11 +15,10 @@ def get_total_files(directory, level=0):
     walk_path = os.walk(directory)
     for _, folder, files in walk_path:
         total_files += len(files)
-        # print(files)
+
         if level == 0:
             break
 
-    # print(total_files)
     return total_files
 
 
@@ -37,12 +36,11 @@ def get_file_list(directory, level=0):
         return files
 
 
-def move_files(source, target, maximum_file):
+def move_files(source, target):
     """
     Move files to folder.
     ----------
     source: the file path.
     target: the target folder name.\n
-    maximum_file: total files you want to keep in a folder.
     """
     shutil.move(source, target)

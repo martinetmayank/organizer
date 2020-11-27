@@ -1,6 +1,7 @@
 import os
 from pprint import pprint
 from files import move_files, get_file_list, get_total_files
+import shutil
 
 
 def get_total_folder(total_files, maximum_file):
@@ -10,7 +11,11 @@ def get_total_folder(total_files, maximum_file):
     total_files: total files in the folder.
     maximum_file: total files you want to keep in a folder.
     """
-    total_folders = int(total_files / maximum_file) + 1
+    total_folders = (total_files / maximum_file)
+
+    if int(total_folders) < total_folders:
+        total_folders = int(total_folders) + 1
+
     print('Total folders that will be created:', total_folders)
     return total_folders
 
@@ -26,15 +31,21 @@ def create_folder(total_folders, name='folder', default_folder=None):
     """
     if default_folder is None:
         current_path = os.path.abspath(os.getcwd())
-        print(current_path)
     else:
         current_path = default_folder
 
     organized_folder = current_path + "\\" + "sorted"
+
+    try:
+        shutil.rmtree(organized_folder)
+    except FileNotFoundError:
+        pass
+
     os.mkdir(organized_folder)
+
     created_folders = list()
     for x in range(0, total_folders):
-        folder_name = organized_folder + "\\" + name + ' 00' + str(x)
+        folder_name = organized_folder + "\\" + name + ' 00' + str(x) + "\\"
         os.mkdir(folder_name)
         created_folders.append(folder_name)
 
@@ -50,8 +61,29 @@ def sort_folder(path, maximum_file=2):
     total_folder = get_total_folder(total_files, maximum_file)
     folder_list = create_folder(total_folder)
 
-    pprint(folder_list)
-    return
-    for folder in folder_list:
-        for file in file_list:
-            move_files(file, folder, maximum_file)
+    # pprint(file_list)
+    # # pprint(folder_list)
+    # return
+    file_counter = 0
+    folder_counter = 0
+    files_moved = 0
+    # print(len(file_list))
+
+    while file_counter < len(file_list):
+        file = path + "\\" + file_list[file_counter]
+        move_files(file, folder_list[folder_counter])
+        # print(file_counter, folder_counter)
+
+        files_moved += 1
+        if files_moved == maximum_file:
+            folder_counter += 1
+            files_moved = 0
+
+        file_counter += 1
+
+    # for folder in folder_list:
+    #     for file in file_list:
+    #         file_path = path + "\\" + file
+    #         print('file ->', file_path)
+    #         # print('folder ->', folder)
+    #         move_files(file_path, folder)
