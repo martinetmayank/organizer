@@ -8,9 +8,8 @@ def get_total_files(directory, level=0):
     ---------
     Default to same folder without sub-directories.
 
-    Arguments:\n
-        directory: the folder location.
-        level: (default 0) change if you want to span all subdirectories
+    directory: the folder location.\n
+    level: (default 0) change if you want to span all subdirectories
     """
     total_files = 0
     walk_path = os.walk(directory)
@@ -30,21 +29,20 @@ def get_file_list(directory, level=0):
     ---------
     Default to same folder without sub-directories.
 
-    Arguments:\n
-        directory: the folder location.
-        level: (default 0) change if you want to span all subdirectories
+    directory: the folder location.\n
+    level: (default 0) change if you want to span all subdirectories
     """
     walk_path = os.walk(directory)
     for _, folder, files in walk_path:
         return files
 
 
-def move_files(source, target, maximum=100):
+def move_files(source, target, maximum_file):
     """
     Move files to folder.
     ----------
-    Arguments:\n
-        target: the target folder name.
-        maximum: total files you want to keep in a folder.
+    source: the file path.
+    target: the target folder name.\n
+    maximum_file: total files you want to keep in a folder.
     """
     shutil.move(source, target)
