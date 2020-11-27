@@ -11,6 +11,7 @@ def get_total_files(directory, level=0):
     directory: the folder location.\n
     level: (default 0) change if you want to span all subdirectories
     """
+
     total_files = 0
     walk_path = os.walk(directory)
     for _, folder, files in walk_path:
@@ -31,6 +32,7 @@ def get_file_list(directory, level=0):
     directory: the folder location.\n
     level: (default 0) change if you want to span all subdirectories
     """
+
     walk_path = os.walk(directory)
     for _, folder, files in walk_path:
         return files
@@ -43,4 +45,5 @@ def move_files(source, target):
     source: the file path.
     target: the target folder name.\n
     """
+
     shutil.move(source, target)

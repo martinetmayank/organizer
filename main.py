@@ -2,7 +2,9 @@ from folder import sort_folder
 
 
 def main():
-    sort_folder(path)
+    # max_files = int(input('How many file syou want to keep in a folder?\n '))
+    max_files = 10
+    sort_folder(path, maximum_file=max_files)
 
 
 if __name__ == "__main__":
